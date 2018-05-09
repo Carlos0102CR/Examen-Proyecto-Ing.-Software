@@ -24,6 +24,11 @@ namespace CoreAPI
             crudFrase.Create(frase);
         }
 
+        public void AddPopularidad(Frase frase)
+        {
+            crudFrase.AddPopularidad(frase);
+        }
+
         public List<Frase> RetrieveAll()
         {
             return crudFrase.RetrieveAll<Frase>();

@@ -30,9 +30,7 @@ namespace ExamenAmpliacion_POLI_BOT
                 }
 
                 Console.WriteLine(" ");
-                Console.WriteLine(" ");
                 Console.WriteLine("Bienvenido " + sesion.Nombre + " ");
-                Console.WriteLine(" ");
                 Console.WriteLine(" ");
                 Console.WriteLine("A que idioma deseas traducir el dia de hoy:");
                 Console.WriteLine(" ");
@@ -50,66 +48,68 @@ namespace ExamenAmpliacion_POLI_BOT
 
                 if (idioma.Nombre.Equals(nombreIdioma.Nombre, StringComparison.CurrentCultureIgnoreCase))
                 {
-                    FraseManager fmg = new FraseManager();
+                    Console.WriteLine("");
                     Console.WriteLine("Ingrese la frase que desea traducir, en espa\u00f1ol:");
 
-                    string palabra = Console.ReadLine();
-                    FraseTraducidaManager ftmg = new FraseTraducidaManager();
+                    string palabra = Console.ReadLine().ToLower();
                     frase = new Frase { Palabra = palabra };
                     FraseTraducida fraseTraducida = new FraseTraducida
                     {
                         Palabra = frase.Palabra,
                         NombreIdioma = idioma.Nombre
                     };
+                    FraseManager fmg = new FraseManager();
+                    FraseTraducidaManager ftmg = new FraseTraducidaManager();
 
-                    if (palabra.Contains(" ") != true)
+                    if (palabra.Contains(" "))
                     {
                         if (fmg.RetrieveByName(frase) == null)
                         {
                             fmg.Create(frase);
-                            if (ftmg.RetrieveByName(fraseTraducida) == null)
+                        }
+                        if (ftmg.RetrieveByName(fraseTraducida) == null)
+                        {
+                            var listaPalabras = palabra.Split(' ');
+                            var traducida = "";
+                            int popularidad = 0;
+
+                            foreach (string palActual in listaPalabras)
                             {
-                                var listaPalabras = palabra.Split(' ');
-                                var traducida = "";
-                                int popularidad = 0;
-
-                                foreach (string palActual in listaPalabras)
+                                frase = new Frase { Palabra = palActual };
+                                if (fmg.RetrieveByName(frase) == null)
                                 {
-                                    frase = new Frase { Palabra = palActual };
-                                    if (fmg.RetrieveByName(frase) == null)
-                                    {
-                                        fmg.Create(frase);
-                                    }
-
-                                    fraseTraducida = new FraseTraducida
-                                    {
-                                        Palabra = frase.Palabra,
-                                        NombreIdioma = idioma.Nombre
-                                    };
-
-                                    if (ftmg.RetrieveByName(fraseTraducida) == null)
-                                    {
-                                        fraseTraducida = SolicitarTraduccion(frase, idioma, fraseTraducida);
-                                        traducida += fraseTraducida.PalabraTraducida + " ";
-                                    }
-
-                                    popularidad += fmg.RetrieveByName(frase).Popularidad;
+                                    fmg.Create(frase);
                                 }
 
-                                frase = new Frase { Palabra = palabra, Popularidad = popularidad };
+                                frase = fmg.RetrieveByName(frase);
+
                                 fraseTraducida = new FraseTraducida
                                 {
                                     Palabra = frase.Palabra,
-                                    PalabraTraducida = traducida,
                                     NombreIdioma = idioma.Nombre
                                 };
 
-                                ftmg.Create(fraseTraducida);
+                                if (ftmg.RetrieveByName(fraseTraducida) == null)
+                                {
+                                    fraseTraducida = SolicitarTraduccion(frase, idioma, fraseTraducida);
+                                }
+                                fraseTraducida = ftmg.RetrieveByName(fraseTraducida);
+                                traducida += fraseTraducida.PalabraTraducida + " ";
+
+                                fmg.AddPopularidad(frase);
+                                frase = fmg.RetrieveByName(frase);
+                                popularidad += frase.Popularidad;
                             }
-                        }
-                        else
-                        {
-                            Imprimir(fraseTraducida);
+
+                            frase = new Frase { Palabra = palabra, Popularidad = popularidad };
+                            fraseTraducida = new FraseTraducida
+                            {
+                                Palabra = frase.Palabra,
+                                PalabraTraducida = traducida,
+                                NombreIdioma = idioma.Nombre
+                            };
+
+                            ftmg.Create(fraseTraducida);
                         }
                     }
                     else
@@ -120,13 +120,18 @@ namespace ExamenAmpliacion_POLI_BOT
                         {
                             fmg.Create(frase);
                         }
+                        frase = fmg.RetrieveByName(frase);
 
                         if (ftmg.RetrieveByName(fraseTraducida) == null)
                         {
                             fraseTraducida = SolicitarTraduccion(frase, idioma, fraseTraducida);
                         }
-                        Imprimir(fraseTraducida);
                     }
+
+                    fmg.AddPopularidad(frase);
+                    frase = fmg.RetrieveByName(frase);
+                    fraseTraducida = ftmg.RetrieveByName(fraseTraducida);
+                    Imprimir(fraseTraducida);
 
 
 
@@ -166,9 +171,10 @@ namespace ExamenAmpliacion_POLI_BOT
         public static FraseTraducida SolicitarTraduccion(Frase frase, Idioma idioma, FraseTraducida fraseTraducida)
         {
             FraseTraducidaManager ftmg = new FraseTraducidaManager();
-            Console.WriteLine("No poseo la traduccion de la palabra " + frase.Palabra +
-                              " en el idioma " + idioma.Nombre + ", por favor ingrese la traduccion:");
-            fraseTraducida.PalabraTraducida = Console.ReadLine();
+            Console.WriteLine("");
+            Console.WriteLine("No poseo la traduccion de la palabra '" + frase.Palabra +
+                              "' en el idioma '" + idioma.Nombre + "', por favor ingrese la traduccion:");
+            fraseTraducida.PalabraTraducida = Console.ReadLine().ToLower();
             ftmg.Create(fraseTraducida);
             return fraseTraducida;
         }
@@ -177,8 +183,9 @@ namespace ExamenAmpliacion_POLI_BOT
         {
             FraseTraducidaManager ftmg = new FraseTraducidaManager();
             fraseTraducida = ftmg.RetrieveByName(fraseTraducida);
-            Console.WriteLine("La palabra " + fraseTraducida.Palabra + " traducida al " +
-                              fraseTraducida.NombreIdioma + " es: " + fraseTraducida.PalabraTraducida);
+            Console.WriteLine("");
+            Console.WriteLine("La frase '" + fraseTraducida.Palabra + "' traducida al '" +
+                              fraseTraducida.NombreIdioma + "' es: '" + fraseTraducida.PalabraTraducida + "'");
         }
 
         public static bool IniciarSesion()
@@ -191,18 +198,22 @@ namespace ExamenAmpliacion_POLI_BOT
             usuario = umg.RetrieveByName(sesion);
             if (usuario != null)
             {
+                Console.WriteLine("");
                 Console.WriteLine("Ingrese la contrase\u00f1a:");
                 sesion.Contrasenna = Console.ReadLine();
                 if (usuario.Contrasenna.Equals(sesion.Contrasenna))
                 {
+                    Console.WriteLine("");
                     Console.WriteLine("Sesion iniciada");
                     sesion = usuario;
                     return true;
                 }
                 else
                 {
+                    Console.WriteLine("");
                     Console.WriteLine("Contrase\u00f1a incorecta......");
                     Console.WriteLine("Intente de nuevo");
+                    Console.WriteLine("");
                 }
             }
             else
@@ -215,7 +226,9 @@ namespace ExamenAmpliacion_POLI_BOT
                     Console.WriteLine("Ingrese una contrase\u00f1a, para el usuario " + sesion.Nombre + ":");
                     sesion.Contrasenna = Console.ReadLine();
                     umg.Create(sesion);
-                    return true;
+                    Console.WriteLine("");
+                    Console.WriteLine("Registro Completo");
+                    Console.WriteLine("");
                 }
             }
 

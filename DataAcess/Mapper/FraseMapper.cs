@@ -20,7 +20,16 @@ namespace DataAcess.Mapper
 
             return operation;
         }
+        
+        public SqlOperation GetAddPopularidadStatement(BaseEntity entity)
+        {
+            var operation = new SqlOperation { ProcedureName = "ADD_FRASE_POPULARIDAD_PR" };
 
+            var f = (Frase)entity;
+            operation.AddVarcharParam(DB_COL_PALABRA, f.Palabra);
+
+            return operation;
+        }
 
         public SqlOperation GetRetriveStatement(BaseEntity entity)
         {

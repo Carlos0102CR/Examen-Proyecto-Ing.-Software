@@ -24,6 +24,14 @@ namespace DataAcess.Crud
                 dao.ExecuteProcedure(sqlOperation);
         }
 
+        public void AddPopularidad(BaseEntity entity)
+        {
+            var frase = (Frase)entity;
+            var sqlOperation = mapper.GetAddPopularidadStatement(frase);
+
+            dao.ExecuteProcedure(sqlOperation);
+        }
+
         public override T Retrieve<T>(BaseEntity entity)
         {
             var lstResult = dao.ExecuteQueryProcedure(mapper.GetRetriveStatement(entity));
