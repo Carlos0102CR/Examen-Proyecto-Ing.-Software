@@ -14,8 +14,9 @@ namespace WebAPI.Controllers
         ApiResponse apiResp = new ApiResponse();
 
         // GetMostTraduccionUsuario api/usuario/GetMostTraduccionUsuario
-        [Route("api/usuario/GetMostTraduccionUsuario")]
-        public IHttpActionResult GetMostTraduccionUsuario(string nombre, string contrasenna)
+        [HttpGet]
+        [Route("api/usuario/GetMostTraduccionUsuario/")]
+        public IHttpActionResult GetMostTraduccionUsuario()
         {
             try
             { 

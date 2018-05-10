@@ -1,0 +1,12 @@
+﻿@using Traduccion_Viewer.Models.Helpers;
+@{
+    ViewBag.Title = "PalabrasPopulares";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Views/PalabrasPopulares.js"></script>
+
+<hr />
+<div class="container">
+    <h2 id="nombreIdioma">Estas son las 100 Palabras mas populares</h2>
+    @Html.CtrlTable(viewName: "PalabrasPopulares", id: "tblPalabras", title: "", columnsTitle: "Palabra,Popularidad", ColumnsDataName: "Palabra,Popularidad", onSelectFunction: "", clase: "table table-hover")
+</div>

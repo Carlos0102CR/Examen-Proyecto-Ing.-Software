@@ -12,7 +12,8 @@ namespace WebAPI.Controllers
         ApiResponse apiResp = new ApiResponse();
 
         // GetTop100 api/fraseTraducida/GetByPalabra/<palabra>
-        [Route("api/fraseTraducida/GetByPalabra")]
+        [HttpGet]
+        [Route("api/fraseTraducida/GetByPalabra/{palabra}")]
         public IHttpActionResult GetByPalabra(string palabra)
         {
             try
@@ -32,7 +33,8 @@ namespace WebAPI.Controllers
         }
 
         // GetTop100 api/fraseTraducida/GetByIdioma/<idioma>
-        [Route("api/fraseTraducida/GetByIdioma")]
+        [HttpGet]
+        [Route("api/fraseTraducida/GetByIdioma/{idioma}")]
         public IHttpActionResult GetByIdioma(string idioma)
         {
             try

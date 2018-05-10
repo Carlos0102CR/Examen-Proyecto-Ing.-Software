@@ -1,0 +1,18 @@
+﻿@using Traduccion_Viewer.Models.Helpers;
+@{
+    ViewBag.Title = "Home Page";
+}
+<script src="~/Scripts/Views/Index.js"></script>
+
+<div class="container">
+    <h2>Idiomas Disponibles</h2>
+    @Html.CtrlTable(viewName: "Index", id: "tblIdiomas", title: "Idiomas", columnsTitle: "Idioma,Popularidad", ColumnsDataName: "Nombre,Popularidad", onSelectFunction: "SaveId", clase: "table table-hover")
+    @Html.CtrlButton(viewName: "Index", id: "btnViewDiccionario", label: "Ver Diccionario", onClickFunction: "ChangeViewDiccionario", buttonType: "primary")
+    <hr />
+    <div class="hero-unit">
+        <h3>El idioma mas popular es:</h3>
+        <a id="idiomaPopular" href="">
+            <h2 id="nombreIdiomaPopular"></h2>
+        </a>
+    </div>
+</div>

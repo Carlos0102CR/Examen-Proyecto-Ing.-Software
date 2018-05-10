@@ -1,0 +1,17 @@
+﻿@using Traduccion_Viewer.Models.Helpers;
+@{
+    ViewBag.Title = "PalabrasDisponibles";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Views/PalabrasDisponibles.js"></script>
+
+<hr />
+<div class="container">
+    <h2 id="nombrePalabra"></h2>
+    @Html.CtrlTable(viewName: "PalabrasDisponibles", id: "tblPalabrasTraducidas", title: "", columnsTitle: "Español,Traducido,Idioma", ColumnsDataName: "Palabra,PalabraTraducida,NombreIdioma", onSelectFunction: "", clase: "table table-hover")
+</div>
+
+<script>
+    sessionStorage.setItem('palabraSeleccionada',"@ViewContext.RouteData.Values["id"]");
+</script>
+

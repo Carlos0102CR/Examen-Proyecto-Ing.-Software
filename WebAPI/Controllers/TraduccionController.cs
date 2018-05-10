@@ -11,19 +11,35 @@ namespace WebAPI.Controllers
     {
         ApiResponse apiResp = new ApiResponse();
 
-        // GetTop100 api/fraseTraducida/GetByPalabra/<palabra>
-        [Route("api/fraseTraducida/GetByPalabra")]
-        public IHttpActionResult GetByPalabra(string palabra)
+        // Get api/fraseTraducida/Get
+        [HttpGet]
+        [Route("api/traducciones/Get/{palabra}")]
+        public IHttpActionResult Get(string palabra)
         {
             try
             {
                 var mng = new TraduccionManager();
-            var traduccion = new Traduccion();
-            traduccion.FraseEspannol = palabra;
+                var traduccion = new Traduccion(){FraseEspannol = palabra };
+                apiResp = new ApiResponse { Data = mng.RetrieveAllByPalabra(traduccion) };
+                return Ok(apiResp);
+            }
+            catch (BussinessException bex)
+            {
+                return InternalServerError(new Exception(bex.ExceptionId + "-" + bex.AppMessage.Message));
+            }
+        }
 
-            apiResp = new ApiResponse();
-            apiResp.Data = mng.RetrieveAllByPalabra(traduccion);
-            return Ok(apiResp);
+        // Get api/fraseTraducida/Get
+        [HttpGet]
+        [Route("api/traducciones/Get")]
+        public IHttpActionResult Get()
+        {
+            try
+            {
+                var mng = new TraduccionManager();
+
+                apiResp = new ApiResponse {Data = mng.RetrieveAll()};
+                return Ok(apiResp);
             }
             catch (BussinessException bex)
             {

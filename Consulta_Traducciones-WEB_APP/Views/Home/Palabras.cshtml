@@ -1,0 +1,15 @@
+﻿@using Traduccion_Viewer.Models.Helpers;
+@{
+    ViewBag.Title = "Palabras";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Views/Palabras.js"></script>
+
+<hr />
+<div class="container">
+    <h2 id="nombreIdioma">Palabras Disponibles</h2>
+    @Html.CtrlTable(viewName: "Palabras", id: "tblPalabras", title: "", columnsTitle: "Palabra,Popularidad", ColumnsDataName: "Palabra,Popularidad", onSelectFunction: "savePalabra", clase: "table table-hover")
+    @Html.CtrlButton(viewName: "Palabras", id: "btnViewTraducciones", label: "Ver Traducciones", onClickFunction: "ChangeViewTraducciones", buttonType: "primary")
+    @Html.CtrlButton(viewName: "Palabras", id: "btnViewPalabras", label: "Ver Idiomas", onClickFunction: "ChangeView", buttonType: "primary")
+</div>
+

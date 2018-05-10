@@ -1,0 +1,16 @@
+﻿@using Traduccion_Viewer.Models.Helpers;
+@{
+    ViewBag.Title = "Diccionarios";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Views/Diccionarios.js"></script>
+
+<hr />
+<div class="container">
+    <h2 id="nombreIdioma">Diccionario</h2>
+    @Html.CtrlTable(viewName: "Diccionarios", id: "tblPalabrasTraducidas", title: "", columnsTitle: "Español,Traducido,Idioma", ColumnsDataName: "Palabra,PalabraTraducida,NombreIdioma", onSelectFunction: "", clase: "table table-hover")
+</div>
+
+<script>
+    sessionStorage.setItem('nombreIdioma',"@ViewContext.RouteData.Values["id"]");
+</script>

@@ -23,6 +23,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4_API", "4_API", "{6082ADA6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Exceptions.csproj", "{DE68F413-04DB-453B-BF57-1F234503B808}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consulta_Traducciones-WEB_APP", "Consulta_Traducciones-WEB_APP\Consulta_Traducciones-WEB_APP.csproj", "{EE69C249-863B-461F-82DA-B689644A9C2A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{DE68F413-04DB-453B-BF57-1F234503B808}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE68F413-04DB-453B-BF57-1F234503B808}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE68F413-04DB-453B-BF57-1F234503B808}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE69C249-863B-461F-82DA-B689644A9C2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE69C249-863B-461F-82DA-B689644A9C2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE69C249-863B-461F-82DA-B689644A9C2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE69C249-863B-461F-82DA-B689644A9C2A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

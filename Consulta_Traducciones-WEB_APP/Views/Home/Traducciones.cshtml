@@ -1,0 +1,17 @@
+﻿@using Traduccion_Viewer.Models.Helpers;
+@{
+    ViewBag.Title = "Traducciones";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="~/Scripts/Views/Traducciones.js"></script>
+
+<hr />
+<div class="container">
+    <h2>Traducciones Realizadas</h2>
+    @Html.CtrlTable(viewName: "Traducciones", id: "tblPalabrasTraducidas", title: "", columnsTitle: "Usuario,Fecha,Idioma,Frase,Frase Traducida,Popularidad", ColumnsDataName: "Usuario,Fecha,Idioma,FraseEspannol,FraseIdioma,Popularidad", onSelectFunction: "", clase: "table table-hover")
+    <hr />
+    <div class="hero-unit">
+        <h3>El usuario con mas traducciones es:</h3>
+            <h2 id="usuario"></h2>
+    </div>
+</div>
