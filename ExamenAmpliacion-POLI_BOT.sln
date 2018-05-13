@@ -25,6 +25,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Exceptions", "Exceptions\Ex
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Consulta_Traducciones-WEB_APP", "Consulta_Traducciones-WEB_APP\Consulta_Traducciones-WEB_APP.csproj", "{EE69C249-863B-461F-82DA-B689644A9C2A}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0_DB", "0_DB", "{592AF5A4-107A-4364-9BB6-833E4790E75F}"
+	ProjectSection(SolutionItems) = preProject
+		D:\Escritorio\David\Proyecto 2\Tecnico\Examen Ampliacion\EXAMEN_AMPLIACION-POLI_BOT.sql = D:\Escritorio\David\Proyecto 2\Tecnico\Examen Ampliacion\EXAMEN_AMPLIACION-POLI_BOT.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
